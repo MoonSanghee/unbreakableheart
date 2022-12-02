@@ -13,6 +13,7 @@
     </div>
     {% for article in articles %}
     <div class="d-flex justify-content-center py-2 mb-2">
+
         <div class="second py-2 px-2">
             <a class="text-decoration-none" href="{% url 'articles:articles_detail' article.pk %}">
                 <span><img class="hover" src="{{ article.picture.url }}" alt="{{ article.picture }}" width="125"></span>
@@ -42,6 +43,5 @@
     </div>
     {% endfor %}
 </div>
-
 
 {% endblock content %}

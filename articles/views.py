@@ -20,7 +20,8 @@ from django.db.models import Value
 from django.db.models.functions import Replace
 
 
-
+def test(request):
+    return render(request, "articles/test.html")
 
 def calendar_1(request):
     return render(request, "articles/calendar_1.html")
