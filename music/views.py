@@ -61,7 +61,6 @@ def search(request):
             }
 
             videos.append(video_data)
-
     context = {
         "videos": videos,
     }

@@ -12,6 +12,7 @@
     <div class="search-off search-div " id="search_box"></div>
     {% bootstrap_button button_type="submit" content="제출"%}
   </form>
+  <a href="{% url 'music:search' %}">음악 찾으러 가기</a>
   <form id="search_form" action="{% url 'articles:song_search' %}" class="d-flex hidden" role="search"></form>
   
 </div>
