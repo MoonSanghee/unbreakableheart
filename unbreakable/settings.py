@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "http://unbreakable-env-1.eba-pe4zaemz.ap-northeast-2.elasticbeanstalk.com",
+    "Unbreakable-env-2.eba-ncfkcent.ap-northeast-2.elasticbeanstalk.com",
     "127.0.0.1",
     "localhost",
 ]
