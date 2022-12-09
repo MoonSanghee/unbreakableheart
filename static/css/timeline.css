@@ -77,6 +77,20 @@
 .short{
     display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 3;
+    overflow:hidden;
+}
+
+.long{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 11;
+    overflow:hidden;
+}
+
+.middle{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
     overflow:hidden;
 }

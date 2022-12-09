@@ -9,43 +9,84 @@
 
 <div class="container">
     {% for diary in diaries %}
-    <div class="d-flex justify-content-center"> 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 my-5 card-box" style="width:60vw;">
+    <div class="d-flex justify-content-center" style="" >
+
+        {% if diary.song or diary.picture %}
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 my-4 card-box" style="width:60vw; cursor: pointer;" onclick="location.href='http://localhost:8000/articles/' + {{diary.pk}} + '/articles_detail/';">
             <div class="col-md-6 col-sm-12" style="padding:0 12px;">
                 {% if diary.song %}
-                <div class="d-flex mt-4 rounded song-box justify-content-center">
-                    <div class="col-5 song-img-box" >
-                        <img class="song-img" src="{{ diary.song.song_thumbnail }}" alt="" style="width:10vw;">
-                    </div>
-                    <div class="col-7 d-flex song-title-box">
-                        <p class="mt-3 song-title">{{ diary.song.song_title }}</p>
-                    </div>
-                </div>
                     {% if diary.picture %}
-                    <a href="{% url 'articles:articles_detail' diary.pk %}"><img class="hover rounded" src="{{ diary.picture.url }}" alt="{{ diary.picture }}" style="height:150px; width:100%; margin:0 0 1.5rem 0;"></a>
+                    <div style="display:flex; justify-content:center; align-items:center; height:100%; width:100%; flex-direction:column;">
+                        <div class="d-flex mt-4 rounded song-box justify-content-center">
+                            <div class="col-5 song-img-box" >
+                                <img class="song-img" src="{{ diary.song.song_thumbnail }}" alt="" style="width:10vw;">
+                            </div>
+                            <div class="col-7 d-flex song-title-box">
+                                <p class="mt-3 song-title">{{ diary.song.song_title }}</p>
+                            </div>
+                        </div>
+                        <div style="height:100%; width:100%;">
+                            <a href="{% url 'articles:articles_detail' diary.pk %}"><img class="hover rounded" src="{{ diary.picture.url }}" alt="{{ diary.picture }}" style="height:150px; width:100%; "></a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div style="display:flex; justify-content:center; align-items:center; height:100%;">
+                        <div class="d-flex mt-4 rounded song-box justify-content-center">
+                            <div class="col-5 song-img-box" >
+                                <img class="song-img" src="{{ diary.song.song_thumbnail }}" alt="" style="width:10vw;">
+                            </div>
+                            <div class="col-7 d-flex song-title-box">
+                                <p class="mt-3 song-title">{{ diary.song.song_title }}</p>
+                            </div>
+                        </div>
+                    </div>
                     {% endif %}
                 {% else %}
                     {% if diary.picture %}
-                    <a href="{% url 'articles:articles_detail' diary.pk %}"><img class="hover rounded" src="{{ diary.picture.url }}" alt="{{ diary.picture }}" style="height:150px; width:100%; margin:1.5rem 0;"></a>
+                        <a href="{% url 'articles:articles_detail' diary.pk %}"><img class="hover rounded" src="{{ diary.picture.url }}" alt="{{ diary.picture }}" style="height:150px; width:100%; margin:1.5rem 0;"></a>                    
                     {% endif %}
                 {% endif %}
             </div>
             <div class="col-md-6 col-sm-12" style="padding:1.5rem 12px;">
                 {% if diary.picture %}
-                <div class="picture-box">
-                    <h1 class="mb-2 content-text">누군가의 이야기</h1>
-                    <p class="text-end mb-1" style="font-size:13px; margin:0;">{{ diary.created_at }}</p>
-                    <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="" style="font-size:14px;">{{ diary.content | linebreaksbr }}</p></a>
-                </div>
+                    {% if diary.song %}
+                    <div class="picture-box">
+                        <h1 class="mb-2 content-text">누군가의 이야기</h1>
+                        <p class="text-end mb-1" style="font-size:13px; margin:0;">{{ diary.created_at }}</p>
+                        <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="long" style="font-size:14px; margin:0;">{{ diary.content | linebreaksbr }}</p></a>
+                    </div>
+                    {% else %}
+                    <div class="picture-box">
+                        <h1 class="mb-2 content-text">누군가의 이야기</h1>
+                        <p class="text-end mb-1" style="font-size:13px; margin:0;">{{ diary.created_at }}</p>
+                        <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="middle" style="font-size:14px; margin:0;">{{ diary.content | linebreaksbr }}</p></a>
+                    </div>
+                    {% endif %}
                 {% else %}
-                <div class="no-picture-box">
-                    <h1 class="mb-2 content-text">누군가의 이야기</h1>
-                    <p class="text-end mb-1" style="font-size:13px; margin:0;">{{ diary.created_at }}</p>
-                    <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="short" style="font-size:14px; margin:0;">{{ diary.content | linebreaksbr }}</p></a>
-                </div>
+                    {% if diary.song %}
+                    <div class="no-picture-box">
+                        <h1 class="mb-2 content-text">누군가의 이야기</h1>
+                        <p class="text-end mb-1" style="font-size:13px; margin:0;">{{ diary.created_at }}</p>
+                        <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="short" style="font-size:14px; margin:0;">{{ diary.content | linebreaksbr }}</p></a>
+                    </div>
+                    {% endif %}
                 {% endif %}
+            </div> 
+        </div>
+
+
+        {% else %}
+
+        <div class="row card-box my-4" style="width:60vw; padding:1.5rem 12px; cursor: pointer;" onclick="location.href='http://localhost:8000/articles/' + {{diary.pk}} + '/articles_detail/';">
+            <div class="picture-box">
+                <h1 class="mb-2 content-text">누군가의 이야기</h1>
+                <p class="text-end mb-1" style="font-size:13px; margin:0;">{{ diary.created_at }}</p>
+                <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="middle" style="font-size:14px; margin:0;">{{ diary.content | linebreaksbr }}</p></a>
             </div>
         </div>
+
+        {% endif %}
     </div>
     {% endfor %}
 </div>
