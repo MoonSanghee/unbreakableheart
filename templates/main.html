@@ -13,9 +13,11 @@
     </div>
 	{% endfor %}
 {% endif %} -->
+{% if request.user.is_authenticated %}
 <div class="title">
     <h1 class="title-text">나의 이야기</h1>
 </div>
+{% endif %}
 {% if request.user.is_authenticated %}
     {% if not articles %}
         <div class="d-flex justify-content-center pt-3 pb-2">
