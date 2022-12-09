@@ -16,13 +16,15 @@ import json
 from django.db.models import Q
 import requests
 from django.conf import settings
-from isodate import parse_duration
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Value
 from django.db.models.functions import Replace
 
+
 def calendar(request):
     return render(request, "articles/calendar.html")
+
 
 def articles_index(request):
     articles = Articles.objects.filter(disclosure=True).order_by("-created_at")
@@ -30,6 +32,7 @@ def articles_index(request):
         "articles": articles,
     }
     return render(request, "articles/articles_index.html", context)
+
 
 @login_required
 def articles_create(request):
@@ -51,6 +54,7 @@ def articles_create(request):
     }
     return render(request, "articles/articles_create.html", context)
 
+
 def song_search(request):
     search_data = request.GET.get("search", "")
     song = Song.objects.filter(song_title__icontains=search_data).all()
@@ -69,6 +73,7 @@ def song_search(request):
     }
     return JsonResponse(context)
 
+
 def articles_detail(request, articles_pk):
     articles = get_object_or_404(Articles, pk=articles_pk)
     context = {
@@ -80,6 +85,7 @@ def articles_detail(request, articles_pk):
     }
     return render(request, "articles/articles_detail.html", context)
 
+
 @login_required
 def articles_delete(request, articles_pk):
     articles = get_object_or_404(Articles, pk=articles_pk)
@@ -88,6 +94,7 @@ def articles_delete(request, articles_pk):
             articles.delete()
             return redirect("articles:articles_index")  # 아마도 메인페이지?
     return redirect("articles:articles_detail", articles_pk)
+
 
 @login_required
 def articles_update(request, articles_pk):
@@ -101,7 +108,7 @@ def articles_update(request, articles_pk):
                     so = Song.objects.get(song_title=request.POST["song"])
                     articles.song = so
                 article.save()
-                
+
             return redirect("articles:articles_detail", articles_pk)
         else:
             articles_form = ArticlesForm(instance=articles)
@@ -112,6 +119,7 @@ def articles_update(request, articles_pk):
     else:
         messages.warning(request, "작성자만 수정 할 수 있습니다.")
         return redirect("articles:articles_index")
+
 
 @login_required
 def comment_create(request, articles_pk):
@@ -162,6 +170,7 @@ def comment_create(request, articles_pk):
     else:
         return redirect("accounts:login")
 
+
 @login_required
 def comment_delete(request, articles_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -172,6 +181,7 @@ def comment_delete(request, articles_pk, comment_pk):
     data = {}
     return JsonResponse(data)
 
+
 # 공감 표현
 @login_required
 def sympathy(request, articles_pk):
@@ -181,20 +191,22 @@ def sympathy(request, articles_pk):
         Sympathy.objects.create(articles=articles, user=request.user)
     if request.method == "POST":
         sympathy = Sympathy.objects.get(articles=articles, user=request.user)
-        if request.POST['feeling']=='😊':
+        if request.POST["feeling"] == "😊":
             sympathy.feeling = 1
-        elif request.POST['feeling']=='😥':
+        elif request.POST["feeling"] == "😥":
             sympathy.feeling = 2
-        elif request.POST['feeling']=='😡':
-            sympathy.feeling = 3  
+        elif request.POST["feeling"] == "😡":
+            sympathy.feeling = 3
         else:
             sympathy.feeling = 4
         sympathy.save()
-        
-    return redirect('articles:articles_detail', articles_pk)
+
+    return redirect("articles:articles_detail", articles_pk)
+
 
 # 게시글 신고
 from django.db import IntegrityError
+
 
 @login_required
 def articles_declaration(request, articles_pk):
@@ -220,6 +232,7 @@ def articles_declaration(request, articles_pk):
     }
     return render(request, "articles/articles_detail.html", context)
 
+
 @login_required
 def comment_declaration(request, articles_pk, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
@@ -244,9 +257,10 @@ def comment_declaration(request, articles_pk, comment_pk):
     }
     return render(request, "articles/articles_detail.html", context)
 
+
 def id_sort(request):
     jsonObject = json.loads(request.body)
-    target_id = jsonObject.get('target_id')
+    target_id = jsonObject.get("target_id")
 
     temp_results_user = Articles.objects.all().filter(user=request.user)
     temp_results = temp_results_user.filter(Q(created_at__contains=target_id))
@@ -255,17 +269,16 @@ def id_sort(request):
         results = 1
     else:
         results = 0
-        
+
     context = {
-        'results': results,
+        "results": results,
     }
 
-    return JsonResponse({'results': results})
+    return JsonResponse({"results": results})
+
 
 def calendar_detail(request, date):
     temp_results_user = Articles.objects.all().filter(user=request.user)
     temp_results = temp_results_user.filter(Q(created_at__contains=date))
-    context = {
-        'diaries': temp_results
-    }
-    return render(request, 'articles/calendar_detail.html', context)
+    context = {"diaries": temp_results}
+    return render(request, "articles/calendar_detail.html", context)
