@@ -180,7 +180,7 @@ def sympathy(request, articles_pk):
     if not sympathy:
         Sympathy.objects.create(articles=articles, user=request.user)
     if request.method == "POST":
-        sympathy = Sympathy.objects.get(articles=articles)
+        sympathy = Sympathy.objects.get(articles=articles, user=request.user)
         if request.POST['feeling']=='😊':
             sympathy.feeling = 1
         elif request.POST['feeling']=='😥':

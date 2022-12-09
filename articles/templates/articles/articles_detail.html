@@ -57,10 +57,10 @@
             </div>
             <form action="{% url 'articles:sympathy' articles.pk %}" method="POST">
               {% csrf_token %}
-              <input type="submit" name="feeling" value="😊">
-              <input type="submit" name="feeling" value="😥">
-              <input type="submit" name="feeling" value="😡">
-              <input type="submit" name="feeling" value="🤣">
+              <input type="submit" name="feeling" value="😊" class="feeling">
+              <input type="submit" name="feeling" value="😥" class="feeling">
+              <input type="submit" name="feeling" value="😡" class="feeling">
+              <input type="submit" name="feeling" value="🤣" class="feeling">
             </form>
 
             {% if request.user == articles.user %}
@@ -160,7 +160,7 @@
                 {% for comment in comments %}
                 {% if comment.parent_id == None %}
                 <div class="container" id='com{{ comment.pk }}'>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                       <span class="text-muted ms-2 font-space">#익명#</span>
                     </div>

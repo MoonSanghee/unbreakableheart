@@ -71,3 +71,9 @@
   left: 34px; 
   border-radius: 50%;
 }
+
+.feeling{
+  border:none;
+  background-color: white;
+  font-size: 20px;
+}
