@@ -57,13 +57,13 @@
             <div class="col-md-6 col-sm-12">
                 {% if article.picture %}
                 <div class="picture-box">
-                    <h1 class="mb-2 content-text">누군가의 이야기</h1>
+                    <h1 class="mb-2 content-text text-center">누군가의 이야기</h1>
                     <p class="text5 text-end">{{ article.created_at }}</p>
                     <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' article.pk %}"><p class="text1 long">{{ article.content | linebreaksbr }}</p></a>
                 </div>
                 {% else %}
                 <div class="no-picture-box">
-                    <h1 class="mb-2 content-text">누군가의 이야기</h1>
+                    <h1 class="mb-2 content-text text-center">누군가의 이야기</h1>
                     <p class="text5 text-end">{{ article.created_at }}</p>
                     <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' article.pk %}"><p class="text1 short">{{ article.content | linebreaksbr }}</p></a>
                 </div>

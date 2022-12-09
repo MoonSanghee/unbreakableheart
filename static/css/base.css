@@ -7,6 +7,8 @@ body {
 .bg {
     background-size: 330px;
     background-image: url('/static/images/bg.png');
+    background-attachment: fixed;
+    min-height: 100%;
 }
 
 .base_1{
