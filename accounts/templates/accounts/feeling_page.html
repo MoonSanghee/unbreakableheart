@@ -7,6 +7,7 @@
 
 {% block content %}
 <h3 class="text-center text-white">공감한 글</h3>
+{% if feelings %}
 {% for feeling in feelings %}
 <div class="d-flex justify-content-center py-2 mb-2">
     <div class="second py-2 px-2">
@@ -29,15 +30,17 @@
                 </span>
             </div>
             <div>
-                <span class="text3">공감</span>
-                <span class="thumbup">공감받은거</span> 
                 <span class="text4">{{ feeling.articles.sympathy_set.count }}</span>
+                <span class="text3">공감중</span>
             </div>
         </div>
         <div>
-            <span class="text5">{{ feeling.articles.created_at }}</span>
+            <span class="text5" id="time">{{ feeling.articles.created_at }}</span>
         </div>
     </div>
 </div>
 {% endfor %}
+{% else %}
+<p class="text-center text-white">공감한 글이 없습니다.</p>
+{% endif %}
 {% endblock content %}

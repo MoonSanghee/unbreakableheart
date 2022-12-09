@@ -57,10 +57,10 @@
             </div>
             <form action="{% url 'articles:sympathy' articles.pk %}" method="POST">
               {% csrf_token %}
-              <input type="submit" name="feeling" value="😊">
-              <input type="submit" name="feeling" value="😥">
-              <input type="submit" name="feeling" value="😡">
-              <input type="submit" name="feeling" value="🤣">
+              <input type="submit" name="feeling" value="😊" class="feeling">
+              <input type="submit" name="feeling" value="😥" class="feeling">
+              <input type="submit" name="feeling" value="😡" class="feeling">
+              <input type="submit" name="feeling" value="🤣" class="feeling">
             </form>
 
             {% if request.user == articles.user %}

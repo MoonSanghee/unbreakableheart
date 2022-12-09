@@ -12,8 +12,7 @@
 {% if messages == 1 %}
 <p class="text-center text-white">받은 메시지가 없습니다.</p>
 {% else %}
-<div class="message_receive_3 mt-4">
-</div>
+<div class="message_receive_3 mt-4"></div>
 <!-- 메시지 전체 삭제 Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -37,16 +36,15 @@
     {% csrf_token %}
     <div class="message_receive_3">
         <button class="btn-two purple d-flex" type="submit">선택 삭제</button>
-        <a class="btn-two ms-2 red fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">전체 삭제</a>
+        <button class="btn-two ms-2 red fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">전체 삭제</button>
     </div>
     {% for message in messages %}
     <div class="d-flex justify-content-center py-2 mb-2">
        <div class="second py-2 px-2 ">
-            <a class="text-decoration-none" href="{% url 'accounts:message_detail' message.pk %}"><p class="text-center message_receive_1">{{ message.content }}</p></a>
-            <input type="checkbox" id="selected" name="selected" value="{{message.id}}">
-            <span class="text5">받은 시간</span>
+           <input type="checkbox" id="selected" name="selected" value="{{message.id}}">
+            <a class="text-decoration-none"href="{% url 'accounts:message_detail' message.pk %}"><p class="ms-3 message_receive_1 short">{{ message.content }}</p></a>
         </div>
-</div>
+    </div>
     {% endfor %}
 </form>
 {% endif %}

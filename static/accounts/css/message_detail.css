@@ -31,3 +31,12 @@
     max-width: 450px;
     margin:auto;
 }
+
+.cdp{
+    background-color: white;
+    padding: 1rem;
+    position: absolute;
+    top: 34px;
+    left: 34px;
+    border-radius: 50%;
+}
