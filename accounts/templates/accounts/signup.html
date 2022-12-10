@@ -24,7 +24,7 @@
             <form action="{% url 'accounts:signup' %}" method="POST">
                 {% csrf_token %}
                 <h1 class="text1" align="center">회원가입</h1>
-                <div class="all-steps" id="all-steps"> 
+                <div class="all-steps" id="all-steps">
                     <img class="step" src="{% static 'images/heart.png' %}" alt=""> 
                     <img class="step" src="{% static 'images/heart.png' %}" alt=""> 
                     <img class="step" src="{% static 'images/heart.png' %}" alt=""> 
@@ -86,7 +86,6 @@
         </div>
     </div>
 </div>
-<div style="height:10rem;"></div>
 
 <script src="{% static 'accounts/js/signup.js' %}"></script>
 {% endblock content %}
