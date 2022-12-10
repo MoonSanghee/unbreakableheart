@@ -2,10 +2,10 @@
 {% load django_bootstrap5 %}
 
 {% block css %}
+<!-- <link rel="stylesheet" href="/static/css/articles_index.css"> -->
+<!-- <link rel="stylesheet" href="/static/calendar/css/calendar.css"> -->
+<!-- <link rel="stylesheet" href="/static/css/timeline.css"> -->
 <link rel="stylesheet" href="/static/articles/css/articles_index.css">
-<link rel="stylesheet" href="/static/css/articles_index.css">
-<link rel="stylesheet" href="/static/css/timeline.css">
-<link rel="stylesheet" href="/static/calendar/css/calendar.css">
 {% endblock css %}
 
 {% block content %}
@@ -63,13 +63,13 @@
             <div class="col-md-6 col-sm-12" style="padding:1.5rem 12px;">
                 {% if article.picture %}
                     {% if article.song %}
-                    <div class="picture-box">
+                    <div class="">
                         <h1 class="mb-2 content-text">이날의 추억</h1>
                         <p class="text-end mb-1 created_at">{{ article.created_at }}</p>
                         <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' article.pk %}"><p class="long diary_content">{{ article.content | linebreaksbr }}</p></a>
                     </div>
                     {% else %}
-                    <div class="picture-box">
+                    <div class="">
                         <h1 class="mb-2 content-text">이날의 추억</h1>
                         <p class="text-end mb-1 created_at">{{ article.created_at }}</p>
                         <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' article.pk %}"><p class="middle diary_content">{{ article.content | linebreaksbr }}</p></a>
@@ -91,7 +91,7 @@
         {% else %}
 
         <div class="row card-box my-4 no_song_no_picture" onclick="location.href='http://localhost:8000/articles/' + {{article.pk}} + '/articles_detail/';">
-            <div class="picture-box">
+            <div class="">
                 <h1 class="mb-2 content-text">이날의 추억</h1>
                 <p class="text-end mb-1 created_at">{{ article.created_at }}</p>
                 <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' article.pk %}"><p class="middle diary_content">{{ article.content | linebreaksbr }}</p></a>
