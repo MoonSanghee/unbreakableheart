@@ -280,5 +280,14 @@ def id_sort(request):
 def calendar_detail(request, date):
     temp_results_user = Articles.objects.all().filter(user=request.user)
     temp_results = temp_results_user.filter(Q(created_at__contains=date))
-    context = {"diaries": temp_results}
+    dates = date.split('-')
+    year = dates[0]
+    month = dates[1]
+    date = dates[2]
+    context = {
+        "diaries": temp_results,
+        "year": year,
+        "month": month,
+        "date": date
+    }
     return render(request, "articles/calendar_detail.html", context)
