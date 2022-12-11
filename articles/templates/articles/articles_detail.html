@@ -53,7 +53,7 @@
             </div>
             <form action="{% url 'articles:sympathy' articles.pk %}" method="POST">
               {% csrf_token %}
-              <input type="submit" name="feeling" value="😊" class="feeling">
+              <input type="submit" name="feeling" id="happy" value="😊" class="feeling">
               <input type="submit" name="feeling" value="😥" class="feeling">
               <input type="submit" name="feeling" value="😡" class="feeling">
               <input type="submit" name="feeling" value="🤣" class="feeling">
@@ -227,19 +227,19 @@
                     {% for recom in comments %}
                     {% if comment.id == recom.parent_id %}
                     <div id='com{{ recom.pk }}' class="border my-2 p-2">
-                      <div class="d-flex align-items-center">
+                      <div class="d-flex align-items-center justify-content-between">
                         <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
+                        <div class="comments_set text-end">
+                          {% if recom.user == request.user %}
+                          <form id='parentform' data-articles-id='{{ articles.pk }}' data-comment-id='{{ recom.id }}'
+                            action="{% url 'articles:comment_delete' articles.pk recom.pk %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
+                          </form>
+                          {% endif %}
+                        </div>
                       </div>
                       <div class="p-3">{{ recom.content }}</div>
-                      <div class="comments_set text-end">
-                        {% if recom.user == request.user %}
-                        <form id='parentform' data-articles-id='{{ articles.pk }}' data-comment-id='{{ recom.id }}'
-                          action="{% url 'articles:comment_delete' articles.pk recom.pk %}" method="POST">
-                          {% csrf_token %}
-                          <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
-                        </form>
-                        {% endif %}
-                      </div>
                     </div>
                     {% endif %}
                     {% endfor %}
@@ -429,15 +429,15 @@
           recomSet.insertAdjacentHTML('beforeend', `
             <div id='com${response.data.comment_pk}' class="border my-2 p-2">
               <div class="d-flex align-items-center">
-                <p class="mb-0 ms-2 me-auto text-muted">${response.data.userName}</p>
+                <p class="mb-0 ms-2 me-auto text-muted">익명</p>
+                <div class="comments_set text-end">           
+                  <form id='parentform' data-articles-id='${articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
+                  </form>
+                </div>
               </div>
               <p class="p-3">${response.data.content}</p>
-              <div class="comments_set text-end">           
-                <form id='parentform' data-articles-id='${articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
-                  {% csrf_token %}
-                  <input class="btn btn-outline-dark rounded-0" type="submit" value="삭제">
-                </form>
-              </div>
             </div>
             `)
 
@@ -749,4 +749,7 @@
   })
 </script>
 
+<script>
+
+</script>
 {% endblock content %}
