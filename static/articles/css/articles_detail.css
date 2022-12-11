@@ -115,9 +115,10 @@ body {
 
 .main_title {
   font-weight: lighter;
-  font-size: 20px;
+  font-size: 19px;
   padding-top: 2rem;
-  margin-top: 1rem;
+  margin-top:1rem;
+  padding-bottom:1rem;
 }
 
 .detail_box_position {
