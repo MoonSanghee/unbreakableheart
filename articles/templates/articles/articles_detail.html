@@ -160,9 +160,6 @@
                     <div class="d-flex align-items-center">
                       <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
                     </div>
-                    <!-- 댓글 내용 상세 보기 -->
-                    <a class="mb-0 mx-3 text-truncate font-space text-decoration-none text-black" data-bs-toggle="modal"
-                      data-bs-target="#commentDetailModal{{ comment.pk }}">{{ comment.content }}</a>
                     <!-- 댓글 내용 상세 모달 -->
                     <div class="modal fade shadow-lg" id="commentDetailModal{{ comment.pk }}" tabindex="-1"
                       aria-labelledby="modalLabel" aria-hidden="true">
@@ -188,10 +185,15 @@
                       </form>
                       {% else %}
                         {% if user.is_authenticated %}
-                        <a href="" class="text-decoration-none" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><img src="{% static 'images/warning.png' %}" class="flag"></a>
+                        <a href="" class="text-decoration-non" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><img src="{% static 'images/warning.png' %}" class="flag"></a>
                         {% endif %}
                       {% endif %}
                     </div>
+                  </div>
+                  <!-- 댓글 내용 상세 보기 -->
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a class="my-2 text-truncate font-space text-decoration-none text-black" data-bs-toggle="modal"
+                      data-bs-target="#commentDetailModal{{ comment.pk }}">{{ comment.content}}</a>
                   </div>
                   <div class='d-flex align-items-center'>
                     <hr class="border border-dark border-1 opacity-50 d-block me-2" width="25px;">
@@ -227,18 +229,20 @@
                     {% for recom in comments %}
                     {% if comment.id == recom.parent_id %}
                     <div id='com{{ recom.pk }}' class="border my-2 p-2">
-                      <div class="d-flex align-items-center">
+                      <div class="d-flex align-items-center justify-content-between">
                         <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
+                        <div class="comments_set text-end">
+                          {% if recom.user == request.user %}
+                          <form id='parentform' data-articles-id='{{ articles.pk }}' data-comment-id='{{ recom.id }}'
+                            action="{% url 'articles:comment_delete' articles.pk recom.pk %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
+                          </form>
+                          {% endif %}
+                        </div>
                       </div>
-                      <div class="p-3">{{ recom.content }}</div>
+                      <div>{{ recom.content }}</div>
                       <div class="comments_set text-end">
-                        {% if recom.user == request.user %}
-                        <form id='parentform' data-articles-id='{{ articles.pk }}' data-comment-id='{{ recom.id }}'
-                          action="{% url 'articles:comment_delete' articles.pk recom.pk %}" method="POST">
-                          {% csrf_token %}
-                          <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
-                        </form>
-                        {% endif %}
                       </div>
                     </div>
                     {% endif %}
@@ -260,7 +264,7 @@
                     </form>
                   </div>
                   {% endif %}
-                  <hr>
+                  <hr class="my-3">
                 </div>
                 {% endif %}
                 {% endfor %}
@@ -307,7 +311,6 @@
                   <div class="d-flex align-items-center">
                     <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
                   </div>
-                  <a class="mb-0 ms-3 text-truncate font-space text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#commentDetailModal${response.data.comment_pk}">${response.data.content}</a>
                   <div class="modal fade shadow-lg" id="commentDetailModal${response.data.comment_pk}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered rounded-0">
                       <div class="modal-content p-3 rounded-0">
@@ -327,10 +330,14 @@
                     </form>
                   </div>
                 </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <a class="my-2 text-truncate font-space text-decoration-none text-black" data-bs-toggle="modal" 
+                  data-bs-target="#commentDetailModal${response.data.comment_pk}">${response.data.content}</a>
+                </div>
                 <div class='d-flex align-items-center'>
                   <a href="" class='text-decoration-none text-dark recomBox'><span data-box-id=${response.data.comment_pk} class='text-muted'>답글 보기</span></a>
                 </div>
-                <hr>
+                <hr class="my-3">
                 <br>
               </div>`);
 
@@ -429,15 +436,15 @@
           recomSet.insertAdjacentHTML('beforeend', `
             <div id='com${response.data.comment_pk}' class="border my-2 p-2">
               <div class="d-flex align-items-center">
-                <p class="mb-0 ms-2 me-auto text-muted">${response.data.userName}</p>
+                <p class="mb-0 me-auto text-muted">익명</p>
+                <div class="comments_set text-end">           
+                  <form id='parentform' data-articles-id='${articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
+                  </form>
+                </div>
               </div>
-              <p class="p-3">${response.data.content}</p>
-              <div class="comments_set text-end">           
-                <form id='parentform' data-articles-id='${articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
-                  {% csrf_token %}
-                  <input class="btn btn-outline-dark rounded-0" type="submit" value="삭제">
-                </form>
-              </div>
+              <p>${response.data.content}</p>
             </div>
             `)
 
