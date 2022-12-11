@@ -186,20 +186,21 @@ def comment_delete(request, articles_pk, comment_pk):
 @login_required
 def sympathy(request, articles_pk):
     articles = Articles.objects.get(pk=articles_pk)
-    sympathy = Sympathy.objects.filter(articles=articles, user=request.user)
-    if not sympathy:
-        Sympathy.objects.create(articles=articles, user=request.user)
-    if request.method == "POST":
-        sympathy = Sympathy.objects.get(articles=articles, user=request.user)
-        if request.POST["feeling"] == "😊":
-            sympathy.feeling = 1
-        elif request.POST["feeling"] == "😥":
-            sympathy.feeling = 2
-        elif request.POST["feeling"] == "😡":
-            sympathy.feeling = 3
-        else:
-            sympathy.feeling = 4
-        sympathy.save()
+    if request.POST["feeling"] == "😊":
+        feeling = 1
+    elif request.POST["feeling"] == "😥":
+        feeling = 2
+    elif request.POST["feeling"] == "😡":
+        feeling = 3
+    else:
+        feeling = 4
+    sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=feeling)
+    
+    if sympathy:
+        sympathy.delete()
+    else:
+        Sympathy.objects.create(articles=articles, user=request.user, feeling=feeling)
+
 
     return redirect("articles:articles_detail", articles_pk)
 
