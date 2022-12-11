@@ -221,10 +221,10 @@ def articles_declaration(request, articles_pk):
                 declaration.reported = articles.user
                 declaration.articles = articles
                 articles_declaration_form.save()
-                # messages.warning(request, "신고되었습니다.")
+                messages.warning(request, "신고되었습니다.")
                 return redirect("articles:articles_detail", articles_pk)
             except IntegrityError:
-                # messages.info(request, '이미 신고한 게시글입니다.')
+                messages.info(request, '이미 신고한 게시글입니다.')
                 return redirect("articles:articles_detail", articles_pk)
     else:
         articles_declaration_form = ArticlesDeclarationForm()
@@ -246,10 +246,10 @@ def comment_declaration(request, articles_pk, comment_pk):
                 declaration.reported = comment.user
                 declaration.comment = comment
                 comment_declaration_form.save()
-                # messages.warning(request, "신고되었습니다.")
+                messages.warning(request, "신고되었습니다.")
                 return redirect("articles:articles_detail", articles_pk)
             except IntegrityError:
-                # messages.info(request, '이미 신고한 댓글입니다.')
+                messages.info(request, '이미 신고한 댓글입니다.')
                 return redirect("articles:articles_detail", articles_pk)
     else:
         comment_declaration_form = ArticlesDeclarationForm()

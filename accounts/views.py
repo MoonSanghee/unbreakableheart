@@ -53,10 +53,8 @@ def login(request):
             articles_d = ArticlesDeclaration.objects.filter(reported=request.user.pk)
             if len(message_d) + len(comment_d) + len(articles_d) >= 3:
                 # 임시
-                # auth_logout(request)
-                messages.add_message(
-                    request, messages.WARNING, "정지된 계정입니다. 운영자에게 문의해주세요."
-                )
+                auth_logout(request)
+                messages.warning(request, "정지된 계정입니다. 운영자에게 문의해주세요.")
                 return redirect("main")
             else:
                 return redirect(request.GET.get("next") or "main")
@@ -274,10 +272,10 @@ def message_declaration(request, message_pk):
                 declaration.reported = message.sender
                 declaration.message = message
                 message_declaration_form.save()
-                # messages.warning(request, "신고되었습니다.")
+                messages.warning(request, "신고되었습니다.")
                 return redirect("accounts:message_detail", message_pk)
             except IntegrityError:
-                # messages.info(request, '이미 신고된 메시지입니다.')
+                messages.info(request, '이미 신고된 메시지입니다.')
                 return redirect("accounts:message_detail", message_pk)
     else:
         message_declaration_form = MessageDeclarationForm()
