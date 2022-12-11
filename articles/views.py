@@ -279,7 +279,7 @@ def id_sort(request):
 
 def calendar_detail(request, date):
     temp_results_user = Articles.objects.all().filter(user=request.user)
-    temp_results = temp_results_user.filter(Q(created_at__contains=date))
+    temp_results = temp_results_user.filter(Q(created_at__contains=date)).order_by('-created_at')
     dates = date.split('-')
     year = dates[0]
     month = dates[1]

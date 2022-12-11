@@ -22,20 +22,20 @@
 <div class="main_position">
   <div class="main_style">
     <div>
-      <h3 class="main_title" align="center" >오늘은 어떠신가요?</h3>
+      <h3 class="main_title" align="center"><span style="font-weight:bold;">{{ articles.created_at }}</span>에 작성된 글</h3>
 
     </div>
 
     <div class="row detail_box_position">
       <div class="col-lg-7 my-2">
-        <div class="d-flex bg-white p-4 rounded-5 review-card" style="top: 10rem;">
+        <div class="d-flex p-4 review-card" style="top: 10rem; border-radius:15px; background-color:rgb(235, 235, 235);">
           <div class="mb-3 d-flex justify-content-between align-items-center">
           </div>
           <div class="detail_content_position">
             {% if request.user == articles.user %}
-            <h1 class="text-start fs-6 mb-0 fw-bold font-space">내가 쓴 글</h1>
+            <h1 class="text-start fs-6 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem;">나의 추억</h1>
             {% else %}
-            <h1 class="text-start fs-6 mb-0 fw-bold font-space">#익명#</h1>
+            <h1 class="text-start fs-6 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem;">다른 사람의 추억</h1>
             {% endif %}
 
             {% if articles.picture %}
@@ -106,7 +106,7 @@
       </div>
       <div class="col-md-12 col-lg-4 my-2">
         {% if articles.song %}
-        <div class="d-plex bg-white p-1 rounded-5 review-card" style="top: 10rem;">
+        <div class="d-plex p-1 review-card" style="top: 10rem; border-radius:15px; background-color:rgb(235, 235, 235);">
           <div class="d-flex justify-content-between align-items-center detail_content_position">
             <!--썸네일 부분-->
 
@@ -136,7 +136,7 @@
         </div>
         <br>
         {% endif %}
-        <div class="d-plex bg-white p-1 rounded-5 review-card" style="top: 10rem;">
+        <div class="d-plex p-1 review-card" style="top: 10rem; border-radius:15px; background-color:rgb(235, 235, 235);">
 
           {% comment %} 댓글 작성 {% endcomment %}
           {% if request.user.is_authenticated %}
@@ -158,7 +158,7 @@
                 <div class="container" id='com{{ comment.pk }}'>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <span class="text-muted ms-2 font-space">#익명#</span>
+                      <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
                     </div>
                     <!-- 댓글 내용 상세 보기 -->
                     <a class="mb-0 mx-3 text-truncate font-space text-decoration-none text-black" data-bs-toggle="modal"
@@ -184,7 +184,7 @@
                       <form id='parentform' data-articles-id='{{ articles.pk }}' data-comment-id='{{ comment.pk }}'
                         action="{% url 'articles:comment_delete' articles.pk comment.pk %}" method="POST">
                         {% csrf_token %}
-                        <input class="btn btn-outline-dark rounded-0" type="submit" value="삭제">
+                        <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
                       </form>
                       {% else %}
                         {% if user.is_authenticated %}
@@ -223,13 +223,12 @@
                   </div>
 
                   <!-- 대댓글 출력 -->
-
                   <div id='recom_set{{comment.id}}' style='display: none;' class='py-2'>
                     {% for recom in comments %}
                     {% if comment.id == recom.parent_id %}
                     <div id='com{{ recom.pk }}' class="border my-2 p-2">
                       <div class="d-flex align-items-center">
-                        <p class="mb-0 ms-2 me-auto text-muted">#익명#</p>
+                        <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
                       </div>
                       <div class="p-3">{{ recom.content }}</div>
                       <div class="comments_set text-end">
@@ -237,7 +236,7 @@
                         <form id='parentform' data-articles-id='{{ articles.pk }}' data-comment-id='{{ recom.id }}'
                           action="{% url 'articles:comment_delete' articles.pk recom.pk %}" method="POST">
                           {% csrf_token %}
-                          <input class="btn btn-outline-dark rounded-0" type="submit" value="삭제">
+                          <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
                         </form>
                         {% endif %}
                       </div>
@@ -306,7 +305,7 @@
               <div class="container" id="com${response.data.comment_pk}">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div class="d-flex align-items-center">
-                    <span class="text-muted ms-2 font-space">${response.data.userName}</span>
+                    <span class="text-muted font-space" style="width:2rem; margin:0;">익명</span>
                   </div>
                   <a class="mb-0 ms-3 text-truncate font-space text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#commentDetailModal${response.data.comment_pk}">${response.data.content}</a>
                   <div class="modal fade shadow-lg" id="commentDetailModal${response.data.comment_pk}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -324,12 +323,11 @@
                   <div class='comments_set'>
                     <form data-articles-id='${response.data.articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${response.data.articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
                       {% csrf_token %}
-                      <input class="btn btn-outline-dark rounded-0" type="submit" value="삭제">
+                      <button type="submit" style="border:none;"><img src="/static/images/trash-can.png" alt="" style="height:1rem;"></button>
                     </form>
                   </div>
                 </div>
                 <div class='d-flex align-items-center'>
-                  <hr class="border border-dark border-1 opacity-50 d-block me-2" width="25px;">
                   <a href="" class='text-decoration-none text-dark recomBox'><span data-box-id=${response.data.comment_pk} class='text-muted'>답글 보기</span></a>
                 </div>
                 <hr>
