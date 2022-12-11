@@ -1,12 +1,12 @@
 
 body {
-	font-family: "Montserrat";
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 .container {
-    margin-top: 4rem;
+    margin-top: 2rem;
 	width: 600px;
-	height: 350px;
+	height: 380px;
 	border-radius: 20px;
 	transition: 1.5s ease-in-out;
 	transform-style: preserve-3d;
@@ -17,11 +17,12 @@ body {
 	text-align: center;
 	width: 100%;
 	height: 100%;
-	padding: 20px 50px;
+	padding: 20px;
 	color: #fff;
 	transform-style: preserve-3d;
 	backface-visibility: hidden;
 	border-radius: 20px;
+	box-shadow: 5px 5px 30px 5px #363062;
 }
 .content {
 	transform: translatez(70px) scale(0.8);
@@ -30,17 +31,14 @@ body {
 .content h1 {
 	position: relative;
 }
-.content p {
-    font-size: 20px;
-	line-height: 2em;
-}
+
 .content h1:before {
 	content: "";
 	position: absolute;
-	bottom: -20px;
+	bottom: -10px;
 	height: 3px;
-	background-color: rgb(99, 35, 171);
-	width: 100px;
+	background-color: #a29dcc;
+	width: 150px;
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -107,4 +105,16 @@ form input[type="submit"] {
 .white-mode:hover {
 	background-color: #fff;
 	color: #122;
+}
+
+.text1{
+	color: rgb(192, 192, 192);
+}
+
+.p1{
+	line-height: 2.5em;
+}
+
+.p2{
+	line-height: 1.7em;
 }
