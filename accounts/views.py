@@ -99,19 +99,25 @@ def profile(request, user_pk):
     articles = user.articles_set.filter(user=user.pk)
     messages = Message.objects.filter(receiver_id=user.pk).order_by("-articles")
     feelings = Sympathy.objects.filter(user=user_pk)
-
+    liked = []
+    for article in feelings:
+        for i in liked:
+            if article.articles == i.articles:
+                break
+        else:
+            liked.append(article)
     context = {
         "user": user,
         "articles": articles,
         "messages": messages,
-        "feelings": len(feelings),
+        "feelings": len(liked),
     }
     return render(request, "accounts/profile.html", context)
 
 
 @login_required
 def message_receive(request):
-    messages = Message.objects.filter(receiver_id=request.user).order_by("-articles")
+    messages = Message.objects.filter(receiver_id=request.user).order_by("-pk")
 
     if messages:
         context = {
@@ -300,7 +306,14 @@ def counter(request):
 
 def feeling_page(request):
     feelings = Sympathy.objects.filter(user=request.user).order_by("-pk")
+    liked = []
+    for article in feelings:
+        for i in liked:
+            if article.articles == i.articles:
+                break
+        else:
+            liked.append(article)
     context = {
-        "feelings": feelings,
+        "feelings": liked,
     }
     return render(request, "accounts/feeling_page.html", context)
