@@ -1,3 +1,7 @@
 .min {
   min-height: 100vh;
 }
+
+.display1{
+  display: none;
+}
