@@ -4,6 +4,7 @@
 {% block css %}
     <link rel="stylesheet" href="/static/css/timeline.css">
     <link rel="stylesheet" href="/static/calendar/css/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 {% endblock css %}
 
 {% block content %}
@@ -23,8 +24,13 @@
         </div>
     {% endif %}
 {% else %}
-    <div class="d-flex justify-content-center pt-3 pb-2">
-        <a class="form-control addtxt btn btn-light fs-6" href="{% url 'accounts:login' %}">로그인하러 가기</a>
+    <div style="height: 500px;" class="d-flex flex-column justify-content-center align-items-center mt-5">
+        <p class="animated fadeInUp text-light fs-3 mb-3" style="animation-delay: 0s;">자신의 하루를 음악으로 기록하고 공유해주세요.</p>
+        <p class="animated fadeInUp text-light fs-3 mb-3" style="animation-delay: 1.5s">누군가의 하루를 공감해주세요.</p>
+        <p class="animated fadeInUp text-light fs-3 mb-3" style="animation-delay: 3s">여러분의 하루들로 페이지를 채워주세요.</p>
+        <div class="d-flex justify-content-center pt-3 pb-2 animated fadeInUp mb-3" style="animation-delay: 4s">
+            <a class="form-control addtxt btn btn-light fs-6" href="{% url 'accounts:login' %}">로그인하러 가기</a>
+        </div>
     </div>
 {% endif %}
 

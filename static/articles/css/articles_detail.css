@@ -35,7 +35,7 @@ body {
 .btnBox .fa {
   margin: 0px 5px;
   font-size: 30pt;
-  color: #FAED7D;
+  color: #e2a384;
   cursor: pointer;
 }
 
@@ -131,7 +131,6 @@ body {
 .detail_content_position {
   flex-direction: column;
   width: 100%;
-  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -177,4 +176,13 @@ body {
   border: none;
   background-color: rgb(239, 239, 239, 0.5);
   font-size: 20px;
+}
+
+.emotion {
+  display: flex; 
+  flex-direction: row;
+  align-items: center; 
+  justify-content: end; 
+  width: 80%; 
+  margin-bottom: 1rem;
 }
