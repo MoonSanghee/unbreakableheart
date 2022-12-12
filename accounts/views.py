@@ -95,7 +95,7 @@ def update(request, user_pk):
 def profile(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
     articles = user.articles_set.filter(user=user.pk)
-    messages = Message.objects.filter(receiver_id=user.pk).order_by("-articles")
+    message = Message.objects.filter(receiver_id=user.pk).order_by("-articles")
     feelings = Sympathy.objects.filter(user=user_pk)
     liked = []
     for article in feelings:
@@ -107,7 +107,7 @@ def profile(request, user_pk):
     context = {
         "user": user,
         "articles": articles,
-        "messages": messages,
+        "message": message,
         "feelings": len(liked),
     }
     return render(request, "accounts/profile.html", context)
@@ -115,16 +115,16 @@ def profile(request, user_pk):
 
 @login_required
 def message_receive(request):
-    messages = Message.objects.filter(receiver_id=request.user).order_by("-pk")
+    message = Message.objects.filter(receiver_id=request.user).order_by("-pk")
 
-    if messages:
+    if message:
         context = {
-            "messages": messages,
+            "message": message,
             "message_declaration_form": MessageDeclarationForm(),
         }
     else:
         context = {
-            "messages": 1,
+            "message": 1,
         }
 
     return render(request, "accounts/message_receive.html", context)
@@ -226,12 +226,12 @@ def message_create(request, user_pk, articles_pk):
 
 @login_required
 def message_delete(request):
-    messages = Message.objects.filter(receiver_id=request.user).order_by("-articles")
+    message = Message.objects.filter(receiver_id=request.user).order_by("-articles")
     if request.method == "POST":
 
         selected = request.POST.getlist("selected")
         print(selected)
-        for m in messages:
+        for m in message:
             for s in selected:
                 if m.id == int(s):
                     m.delete()
@@ -240,8 +240,8 @@ def message_delete(request):
 
 @login_required
 def message_delete_all(request):
-    messages = Message.objects.filter(receiver_id=request.user)
-    messages.delete()
+    message = Message.objects.filter(receiver_id=request.user)
+    message.delete()
     return redirect("accounts:message_receive")
 
 
@@ -289,9 +289,9 @@ def counter(request):
     count = 0
     try:
         if request.user.is_authenticated:
-            messages = Message.objects.filter(receiver=request.user)
-            for message in messages:
-                if message.read == 0:
+            message = Message.objects.filter(receiver=request.user)
+            for m in message:
+                if m.read == 0:
                     count += 1
         else:
             pass
