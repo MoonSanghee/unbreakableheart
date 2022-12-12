@@ -45,6 +45,7 @@
     <div class="d-flex justify-content-center py-2 mb-2">
         <div class="second py-2 px-2">
             <input type="checkbox" style="width:1rem; height:1rem; margin-left:1rem;" id="selected" name="selected" value="{{m.id}}">
+            <span>{{ m.articles.created_at |date:'Y-m-d' }}에 작성한 일기로부터</span>
             <hr style="margin-top:0;">
             <a class="text-decoration-none" href="{% url 'accounts:message_detail' m.pk %}" style="color:black;"><p class="ms-3 message_receive_1 short">{{ m.content }}</p></a>
         </div>
@@ -54,5 +55,4 @@
 </form>
 {% endif %}
 <div class="container base_6"></div>
-
 {% endblock content %}
