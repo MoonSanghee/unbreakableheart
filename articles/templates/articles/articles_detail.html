@@ -65,7 +65,7 @@
               <a href="{% url 'articles:articles_update' articles.pk %}" class="btn articles-update-btn rounded-0"
                 method="POST"><i class="bi bi-pencil-square fs-3"></i></a>
               <a href="{% url 'articles:articles_delete' articles.pk %}" class="btn articles-update-btn rounded-0"
-                method="POST"><img src="{% static 'images/trash-can.png' %}" class="flag"></a>
+                ><img src="{% static 'images/trash-can.png' %}" class="flag"></a>
             </div>
             {% else %}
               {% if user.is_authenticated%}
