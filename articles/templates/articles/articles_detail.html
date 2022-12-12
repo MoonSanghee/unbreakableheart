@@ -37,7 +37,10 @@
             {% else %}
             <h1 class="text-start fs-6 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem;">다른 사람의 추억</h1>
             {% endif %}
-
+            <div class="emotion">
+              <div>이 날의 감정</div>
+              <span style="font-size: 20pt; margin-left: 10px;">{{ articles.feelings }}</span>
+            </div>
             {% if articles.picture %}
             <div class="d-flex justify-content-center">
               <img src="{{ articles.picture.url }}" alt="{{ articles.picture }}" class="container px-0"
@@ -49,8 +52,6 @@
             </div>
             {% endif %}
             <div class="fs-6 font-space m-2">{{ articles.content | linebreaksbr }}</div>
-            <div style="font-size: 30pt;">{{ articles.feelings }}
-            </div>
             <form action="{% url 'articles:sympathy' articles.pk %}" method="POST">
               {% csrf_token %}
               <input type="submit" name="feeling" id="happy" value="😊" class="feeling">
@@ -106,7 +107,7 @@
       </div>
       <div class="col-md-12 col-lg-4 my-2">
         {% if articles.song %}
-        <div class="d-plex p-1 review-card" style="top: 10rem; border-radius:15px; background-color:rgb(235, 235, 235);">
+        <div class="d-flex pt-2 review-card" style="top: 10rem; border-radius:15px; background-color:rgb(235, 235, 235);">
           <div class="d-flex justify-content-between align-items-center detail_content_position">
             <!--썸네일 부분-->
 
@@ -121,7 +122,7 @@
                   <img src="{{ articles.song.song_thumbnail }}" class="thumbnail">
                   <div class="cdp"></div>
                 </div>
-                <div class="d-flex justify-content-center align-items-center music_btn">
+                <div class="d-flex justify-content-center align-items-center music_btn ms-5">
                   <i id="play-button" class="fa fa-play" aria-hidden="true"></i>
                   <i id="pause-button" class="fa fa-pause" aria-hidden="true"></i>
                   <i id="stop-button" class="fa fa-stop" aria-hidden="true"></i>
@@ -129,7 +130,7 @@
               </div>
               <div id="player"></div>
             </div>
-            <div class="mt-2 text-bg-dark">
+            <div class="mt-2 text-bg-dark rounded-3" style="width: 100%;">
               <MARQUEE>{{ articles.song.song_title }}</MARQUEE>
             </div>
           </div>
@@ -654,8 +655,8 @@
     $("#play-button").click(function () {
 
       if (starFlag) {
-        $(".fa").css("color", "#FAED7D")
-        this.style.color = "#4C4C4C";
+        $(".fa").css("color", "#e2a384")
+        this.style.color = "#4d4c7d";
         starFlag = false;
 
         if (time == 0) {
@@ -691,8 +692,8 @@
     // pause btn
     $("#pause-button").click(function () {
       if (time != 0) {
-        $(".fa").css("color", "#FAED7D")
-        this.style.color = "#4C4C4C";
+        $(".fa").css("color", "#e2a384")
+        this.style.color = "#4d4c7d";
         clearInterval(timer);
         starFlag = true;
       }
@@ -701,8 +702,8 @@
     // stop btn
     $("#stop-button").click(function () {
       if (time != 0) {
-        $(".fa").css("color", "#FAED7D")
-        this.style.color = "#4C4C4C";
+        $(".fa").css("color", "#e2a384")
+        this.style.color = "#4d4c7d";
         clearInterval(timer);
         starFlag = true;
         time = 0;
