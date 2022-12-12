@@ -30,7 +30,7 @@
                                 <p class="mt-3 song-title">{{ diary.song.song_title }}</p>
                             </div>
                         </div>
-                        <div style="height:100%; width:100%;">
+                        <div class="mb-4" style="height:100%; width:100%;">
                             <a href="{% url 'articles:articles_detail' diary.pk %}"><img class="hover rounded diary_pic" src="{{ diary.picture.url }}" alt="{{ diary.picture }}"></a>
                         </div>
                     </div>
@@ -56,13 +56,13 @@
                 {% if diary.picture %}
                     {% if diary.song %}
                     <div class="picture-box">
-                        <h1 class="mb-2 content-text">이날의 추억</h1>
+                        <h1 class="mb-2 content-text text-center">이날의 추억</h1>
                         <p class="text-end mb-1 created_at">{{ diary.created_at }}</p>
                         <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="long diary_content">{{ diary.content | linebreaksbr }}</p></a>
                     </div>
                     {% else %}
                     <div class="picture-box">
-                        <h1 class="mb-2 content-text">이날의 추억</h1>
+                        <h1 class="mb-2 content-text text-center">이날의 추억</h1>
                         <p class="text-end mb-1 created_at">{{ diary.created_at }}</p>
                         <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="middle diary_content">{{ diary.content | linebreaksbr }}</p></a>
                     </div>
@@ -70,7 +70,7 @@
                 {% else %}
                     {% if diary.song %}
                     <div class="no-picture-box">
-                        <h1 class="mb-2 content-text">이날의 추억</h1>
+                        <h1 class="mb-2 content-text text-center">이날의 추억</h1>
                         <p class="text-end mb-1 created_at">{{ diary.created_at }}</p>
                         <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="short diary_content">{{ diary.content | linebreaksbr }}</p></a>
                     </div>
@@ -84,7 +84,7 @@
 
         <div class="row card-box my-4 no_song_no_picture" onclick="location.href='http://localhost:8000/articles/' + {{diary.pk}} + '/articles_detail/';">
             <div class="picture-box">
-                <h1 class="mb-2 content-text">이날의 추억</h1>
+                <h1 class="mb-2 content-text text-center">이날의 추억</h1>
                 <p class="text-end mb-1 created_at">{{ diary.created_at }}</p>
                 <a class="text-decoration-none text-dark" href="{% url 'articles:articles_detail' diary.pk %}"><p class="middle diary_content">{{ diary.content | linebreaksbr }}</p></a>
             </div>

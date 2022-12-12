@@ -176,10 +176,11 @@ html, body {
 }
 
 .content-text{
-    font-size:16px; 
+    font-size:20px; 
     color:gray;
     background-color: rgb(255, 255, 255, 0.4);
     border: rgb(255, 255, 255, 0.4);
+    border-radius: 10px;
 }
 
 .title {
@@ -197,7 +198,7 @@ html, body {
 .long{
     display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 11;
+	-webkit-line-clamp: 12;
     overflow:hidden;
 }
 
@@ -214,13 +215,14 @@ html, body {
 }
 
 .diary_content{
-    font-size:14px; 
+    font-size:17px; 
     margin:0;
 }
 
 .diary_pic{
-    height:150px; 
+    height:300px; 
     width:100%;
+    object-fit: cover;
 }
 
 .song_and_picture{
