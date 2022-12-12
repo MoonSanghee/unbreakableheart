@@ -47,8 +47,8 @@
         <span class="cnt start-100 translate-middle badge rounded-pill bg-danger">{{count}}</span>
       </div>
       {% else %}
-      <a class="top_account_img" href="{% url 'accounts:login' %}"><img src="{% static 'images/login.png' %}" alt="logo" class="base_5"></a>
-      <a class="top_account_img mx-3" href="{% url 'accounts:signup' %}"><img src="{% static 'images/signup.png' %}" alt="logo" class="base_5"></a>
+      <a class="top_account_img logo-bg" href="{% url 'accounts:login' %}"><img src="{% static 'images/login.png' %}" alt="logo" class="base_5"></a>
+      <a class="top_account_img mx-3 logo-bg" href="{% url 'accounts:signup' %}"><img src="{% static 'images/signup.png' %}" alt="logo" class="base_5"></a>
       {% endif %}
     </div>
   </div>
