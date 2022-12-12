@@ -9,7 +9,7 @@
 {% block content %}
 
 <h4 class="text-center text-white">내가 받은 메시지</h4>
-{% if messages == 1 %}
+{% if message == 1 %}
 <p class="text-center text-white">받은 메시지가 없습니다.</p>
 {% else %}
 <div class="message_receive_3 mt-4"></div>
@@ -38,11 +38,11 @@
         <button class="btn-two purple d-flex" type="submit">선택 삭제</button>
         <button class="btn-two ms-2 red fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">전체 삭제</button>
     </div>
-    {% for message in messages %}
+    {% for m in message %}
     <div class="d-flex justify-content-center py-2 mb-2">
        <div class="second py-2 px-2 ">
-           <input type="checkbox" id="selected" name="selected" value="{{message.id}}">
-            <a class="text-decoration-none"href="{% url 'accounts:message_detail' message.pk %}"><p class="ms-3 message_receive_1 short">{{ message.content }}</p></a>
+           <input type="checkbox" id="selected" name="selected" value="{{m.id}}">
+            <a class="text-decoration-none"href="{% url 'accounts:message_detail' m.pk %}"><p class="ms-3 message_receive_1 short">{{ m.content }}</p></a>
         </div>
     </div>
     {% endfor %}

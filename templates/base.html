@@ -54,9 +54,9 @@
     </div>
   </div>
   {% if messages %}
-	{% for message in messages %}
+	{% for m in messages %}
     <div class="alert alert-{{message.tags}}" role="alert">
-        {{message.message}}
+        {{m.message}}
     </div>
   {% endfor %}
   {% endif %}
