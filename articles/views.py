@@ -90,9 +90,8 @@ def articles_detail(request, articles_pk):
 def articles_delete(request, articles_pk):
     articles = get_object_or_404(Articles, pk=articles_pk)
     if request.user == articles.user:
-        if request.method == "POST":
-            articles.delete()
-            return redirect("articles:articles_index")  # 아마도 메인페이지?
+        articles.delete()
+        return redirect("articles:articles_index")  # 아마도 메인페이지?
     return redirect("articles:articles_detail", articles_pk)
 
 
