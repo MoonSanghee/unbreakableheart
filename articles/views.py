@@ -76,10 +76,17 @@ def song_search(request):
 
 def articles_detail(request, articles_pk):
     articles = get_object_or_404(Articles, pk=articles_pk)
-    happy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=1)
-    sad = Sympathy.objects.filter(articles=articles, user=request.user, feeling=2)
-    angry = Sympathy.objects.filter(articles=articles, user=request.user, feeling=3)
-    funny = Sympathy.objects.filter(articles=articles, user=request.user, feeling=4)
+    if request.user.is_authenticated:
+        happy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=1)
+        sad = Sympathy.objects.filter(articles=articles, user=request.user, feeling=2)
+        angry = Sympathy.objects.filter(articles=articles, user=request.user, feeling=3)
+        funny = Sympathy.objects.filter(articles=articles, user=request.user, feeling=4)
+    else:
+        happy = 0
+        sad = 0
+        angry = 0
+        funny = 0
+    
     context = {
         "articles": articles,
         "comment_form": CommentForm(),
