@@ -31,12 +31,15 @@
 
 .second {
     width: 400px;
-    background-color: #ffffff;
-    border-radius: 4px;
-    box-shadow: 10px 10px 5px #aaaaaa;
+    background-color: rgb(239, 239, 239, 0.5);
+    border-radius: 15px;
+    box-shadow: 5px 5px 30px 5px #363062;
 }
 
-
+.second:hover {
+    transform: scale(1.1, 1.1);
+    transition: 0.8s;
+}
 /* /static/css/btn.css */
 
 .btn.purple, .btn-two.purple {
@@ -64,4 +67,24 @@
     border-color: rgba(0, 0, 0, 0.34) rgba(0, 0, 0, 0.21) rgba(0, 0, 0, 0.21);
     box-shadow: 0 1px 0 rgba(80, 74, 74, 0.89), 0 1px rgba(0, 0, 0, 0.05) inset;
     position: relative;
+}
+
+.whole{
+    background-color:rgb(183, 29, 29); 
+    color:white;
+}
+
+.whole:hover{
+    background-color:rgb(127, 32, 32); 
+    color:white;
+}
+
+.part{
+    background-color:#3e386b; 
+    color:white;
+}
+
+.part:hover{
+    background-color:rgb(37, 30, 82);
+    color:white;
 }
