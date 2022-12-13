@@ -158,7 +158,7 @@ def password(request):
 # 카카오 소셜 로그인
 def kakao_request(reqeust):
     kakao_api = "https://kauth.kakao.com/oauth/authorize?response_type=code"
-    redirect_uri = "http://unbreakableheart-env.eba-fq3y3emz.ap-northeast-2.elasticbeanstalk.com/accounts/kakao/login/callback/"
+    redirect_uri = "http://localhost:8000/accounts/kakao/login/callback/"
     client_id = "fdc7989db5f7e970c9ba50edb78ec9a6"
     return redirect(f"{kakao_api}&client_id={client_id}&redirect_uri={redirect_uri}")
 
@@ -167,7 +167,7 @@ def kakao_callback(request):
     data = {
         "grant_type": "authorization_code",
         "client_id": "fdc7989db5f7e970c9ba50edb78ec9a6",
-        "redirect_uri": "http://unbreakableheart-env.eba-fq3y3emz.ap-northeast-2.elasticbeanstalk.com/accounts/kakao/login/callback/",
+        "redirect_uri": "http://localhost:8000/accounts/kakao/login/callback/",
         "code": request.GET.get("code"),
     }
 
