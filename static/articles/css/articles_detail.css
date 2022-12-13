@@ -131,7 +131,6 @@ body {
 .detail_content_position {
   flex-direction: column;
   width: 100%;
-  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
