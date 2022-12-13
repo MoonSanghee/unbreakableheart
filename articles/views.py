@@ -76,12 +76,20 @@ def song_search(request):
 
 def articles_detail(request, articles_pk):
     articles = get_object_or_404(Articles, pk=articles_pk)
+    happy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=1)
+    sad = Sympathy.objects.filter(articles=articles, user=request.user, feeling=2)
+    angry = Sympathy.objects.filter(articles=articles, user=request.user, feeling=3)
+    funny = Sympathy.objects.filter(articles=articles, user=request.user, feeling=4)
     context = {
         "articles": articles,
         "comment_form": CommentForm(),
         "comments": articles.comment_set.all(),
         "articles_declaration_form": ArticlesDeclarationForm(),
         "comment_declaration_form": CommentDeclarationForm(),
+        'f1':happy,
+        'f2':sad,
+        'f3':angry,
+        'f4':funny,
     }
     return render(request, "articles/articles_detail.html", context)
 
@@ -180,34 +188,10 @@ def comment_delete(request, articles_pk, comment_pk):
     data = {}
     return JsonResponse(data)
 
-
 # 공감 표현
-@login_required
-def sympathy(request, articles_pk):
-    articles = Articles.objects.get(pk=articles_pk)
-    
-    if request.POST["feeling"] == "😊":
-        feeling = 1
-    elif request.POST["feeling"] == "😥":
-        feeling = 2
-    elif request.POST["feeling"] == "😡":
-        feeling = 3
-    else:
-        feeling = 4
-    sympathys = Sympathy.objects.filter(articles=articles, user=request.user, feeling=feeling)
-    
-    if sympathys:
-        sympathys.delete()
-        s = False
-    else:
-        Sympathy.objects.create(articles=articles, user=request.user, feeling=feeling)
-        s = True
-    data = {'s': s}
-    return JsonResponse(data)
-
+# 행복
 @login_required
 def happy(request, articles_pk):
-    print('hello')
     articles = Articles.objects.get(pk=articles_pk)
     sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=1)
     if sympathy:
@@ -220,6 +204,49 @@ def happy(request, articles_pk):
         's': s,
     }
     return JsonResponse(data)
+# 슬픔
+def sad(request, articles_pk):
+    articles = Articles.objects.get(pk=articles_pk)
+    sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=2)
+    if sympathy:
+        sympathy.delete()
+        s = False
+    else:
+        Sympathy.objects.create(articles=articles, user=request.user, feeling=2)
+        s = True
+    data = {
+        's': s,
+    }
+    return JsonResponse(data)
+# 화남
+def angry(request, articles_pk):
+    articles = Articles.objects.get(pk=articles_pk)
+    sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=3)
+    if sympathy:
+        sympathy.delete()
+        s = False
+    else:
+        Sympathy.objects.create(articles=articles, user=request.user, feeling=3)
+        s = True
+    data = {
+        's': s,
+    }
+    return JsonResponse(data)
+# 웃김
+def funny(request, articles_pk):
+    articles = Articles.objects.get(pk=articles_pk)
+    sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=4)
+    if sympathy:
+        sympathy.delete()
+        s = False
+    else:
+        Sympathy.objects.create(articles=articles, user=request.user, feeling=4)
+        s = True
+    data = {
+        's': s,
+    }
+    return JsonResponse(data)
+
 
 # 게시글 신고
 from django.db import IntegrityError
