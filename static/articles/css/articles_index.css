@@ -198,7 +198,7 @@ html, body {
 .long{
     display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 12;
+	-webkit-line-clamp: 11;
     overflow:hidden;
 }
 

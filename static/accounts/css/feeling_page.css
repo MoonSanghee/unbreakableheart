@@ -72,10 +72,11 @@
 }
 
 .content-text {
-  font-size: 16px;
+  font-size: 20px;
   color: gray;
   background-color: rgb(255, 255, 255, 0.4);
   border: rgb(255, 255, 255, 0.4);
+  border-radius: 10px;
 }
 
 .title {
@@ -125,13 +126,14 @@
 }
 
 .diary_content {
-  font-size: 14px;
+  font-size: 17px;
   margin: 0;
 }
 
 .diary_pic {
-  height: 150px;
+  height: 300px;
   width: 100%;
+  object-fit: cover;
 }
 
 .song_and_picture {
