@@ -52,18 +52,55 @@
             </div>
             {% endif %}
             <div class="fs-6 font-space m-2">{{ articles.content | linebreaksbr }}</div>
-            <form action="{% url 'articles:sympathy' articles.pk %}" method="POST">
-              {% csrf_token %}
-              <input type="submit" name="feeling" value="😊" class="feeling">
-              <input type="submit" name="feeling" value="😥" class="feeling">
-              <input type="submit" name="feeling" value="😡" class="feeling">
-              <input type="submit" name="feeling" value="🤣" class="feeling">
-            </form>
-            <form action="{% url 'articles:happy' articles.pk %}" id="sym-form" data-detail-id="{{ articles.pk }}">
-              {% csrf_token %}
-              <input type="submit" name="feeling" value="😊" class="feeling">
+            {% if user.is_authenticated %}
+            <div class="d-flex">
+              {% if f1 %}
+              <form action="{% url 'articles:happy' articles.pk %}" id="happy-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle" style=" box-shadow: 5px 5px 5px #363062">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="😊" class="feeling" style="background: none;">
+              </form>
+              {% else %}
+              <form action="{% url 'articles:happy' articles.pk %}" id="happy-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="😊" class="feeling" style="background: none;">
+              </form>
+              {% endif %}
+              {% if f2 %}
+              <form action="{% url 'articles:sad' articles.pk %}" id="sad-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle" style=" box-shadow: 5px 5px 5px #363062">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="😥" class="feeling" style="background: none;">
+              </form>
+              {% else %}
+              <form action="{% url 'articles:sad' articles.pk %}" id="sad-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="😥" class="feeling" style="background: none;">
+              </form>
+              {% endif %}
+              {% if f3 %}
+              <form action="{% url 'articles:angry' articles.pk %}" id="angry-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle" style=" box-shadow: 5px 5px 5px #363062">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="😡" class="feeling" style="background: none;">
+              </form>
+              {% else %}
+              <form action="{% url 'articles:angry' articles.pk %}" id="angry-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="😡" class="feeling" style="background: none;">
+              </form>
+              {% endif %}
+              {% if f4 %}
+              <form action="{% url 'articles:funny' articles.pk %}" id="funny-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle" style=" box-shadow: 5px 5px 5px #363062">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="🤣" class="feeling" style="background: none;">
+              </form>
+              {% else %}
+              <form action="{% url 'articles:funny' articles.pk %}" id="funny-form" data-detail-id="{{ articles.pk }}" class="p-1 m-1 rounded-circle">
+                {% csrf_token %}
+                <input type="submit" name="feeling" value="🤣" class="feeling" style="background: none;">
+              </form>
+              {% endif %}
 
-            </form>
+            </div>
+            {% endif %}
 
             {% if request.user == articles.user %}
             <div>
@@ -438,7 +475,6 @@
           recomSet.insertAdjacentHTML('beforeend', `
             <div id='com${response.data.comment_pk}' class="border my-2 p-2">
               <div class="d-flex align-items-center">
-
                 <p class="mb-0 me-auto text-muted">익명</p>
                 <div class="comments_set text-end">           
                   <form id='parentform' data-articles-id='${articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
@@ -760,9 +796,10 @@
 </script>
 
 <script>
-  const symform = document.querySelector('#sym-form')
+  // 행복
+  const happyform = document.querySelector('#happy-form')
 
-  symform.addEventListener('submit', function (event) {
+  happyform.addEventListener('submit', function (event) {
     event.preventDefault();
     console.log(event)
     
@@ -774,18 +811,82 @@
       }
     })
     .then(response => {
-      console.log('hello')
-      })
+      console.log(response)
+      if (response.data.s === true) {
+        event.target.style.boxShadow = "5px 5px 5px #363062"
+      } else {
+        event.target.style.boxShadow = "none"
+      }
     })
+  })
+  // 슬픔
+  const sadform = document.querySelector('#sad-form')
+
+  sadform.addEventListener('submit', function (event) {
+    event.preventDefault();
+    console.log(event)
     
-  //   .then(response => {
-  //     console.log(response)
-  //     if (response.data.s === true) {
-  //       event.target.classList.add('m-2')
-  //     } else {
-  //       event.target.classList.remove('m-2')
-  //     }
-  //   })
-  // })
+    axios({
+      method : 'POST',
+      url: `/articles/${event.target.dataset.detailId}/sad/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(response => {
+      console.log(response)
+      if (response.data.s === true) {
+        event.target.style.boxShadow = "5px 5px 5px #363062"
+      } else {
+        event.target.style.boxShadow = "none"
+      }
+    })
+  })
+  // 화남
+  const angryform = document.querySelector('#angry-form')
+
+  angryform.addEventListener('submit', function (event) {
+    event.preventDefault();
+    console.log(event)
+    
+    axios({
+      method : 'POST',
+      url: `/articles/${event.target.dataset.detailId}/angry/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(response => {
+      console.log(response)
+      if (response.data.s === true) {
+        event.target.style.boxShadow = "5px 5px 5px #363062"
+      } else {
+        event.target.style.boxShadow = "none"
+      }
+    })
+  })
+  // 웃김
+  const funnyform = document.querySelector('#funny-form')
+
+  funnyform.addEventListener('submit', function (event) {
+    event.preventDefault();
+    console.log(event)
+    
+    axios({
+      method : 'POST',
+      url: `/articles/${event.target.dataset.detailId}/funny/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(response => {
+      console.log(response)
+      if (response.data.s === true) {
+        event.target.style.boxShadow = "5px 5px 5px #363062"
+      } else {
+        event.target.style.boxShadow = "none"
+      }
+    })
+  })
 </script>
 {% endblock content %}
