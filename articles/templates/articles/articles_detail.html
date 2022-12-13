@@ -475,7 +475,6 @@
           recomSet.insertAdjacentHTML('beforeend', `
             <div id='com${response.data.comment_pk}' class="border my-2 p-2">
               <div class="d-flex align-items-center">
-
                 <p class="mb-0 me-auto text-muted">익명</p>
                 <div class="comments_set text-end">           
                   <form id='parentform' data-articles-id='${articles_pk}' data-comment-id='${response.data.comment_pk}' action="http://127.0.0.1:8000/articles/${articles_pk}/articles_detail/comments/${response.data.comment_pk}/comment_delete/" method="POST">
