@@ -33,14 +33,14 @@
           </div>
           <div class="detail_content_position">
             {% if request.user == articles.user %}
-            <h1 class="text-start fs-6 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem;">나의 추억</h1>
+            <h1 class="text-start fs-5 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem;">나의 추억 <span>{{ articles.feelings }}</span></h1>
             {% else %}
-            <h1 class="text-start fs-6 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem;">다른 사람의 추억</h1>
-            {% endif %}
-            <div class="emotion">
-              <div>이 날의 감정</div>
-              <span style="font-size: 20pt; margin-left: 10px;">{{ articles.feelings }}</span>
+            <div class="d-flex justify-content-between w-100">
+              <div style=" width:35%;"></div>
+              <h1 class="text-start fs-5 mb-0 font-space" style="color:rgb(83, 83, 83); padding-bottom:1rem; width: 45%;">다른 사람의 추억 </h1>
+              <div style=" width: 15%;">{{ articles.feelings }}</div>
             </div>
+            {% endif %}
             {% if articles.picture %}
             <div class="d-flex justify-content-center">
               <img src="{{ articles.picture.url }}" alt="{{ articles.picture }}" class="container px-0"
@@ -54,10 +54,15 @@
             <div class="fs-6 font-space m-2">{{ articles.content | linebreaksbr }}</div>
             <form action="{% url 'articles:sympathy' articles.pk %}" method="POST">
               {% csrf_token %}
-              <input type="submit" name="feeling" id="happy" value="😊" class="feeling">
+              <input type="submit" name="feeling" value="😊" class="feeling">
               <input type="submit" name="feeling" value="😥" class="feeling">
               <input type="submit" name="feeling" value="😡" class="feeling">
               <input type="submit" name="feeling" value="🤣" class="feeling">
+            </form>
+            <form action="{% url 'articles:happy' articles.pk %}" id="sym-form" data-detail-id="{{ articles.pk }}">
+              {% csrf_token %}
+              <input type="submit" name="feeling" value="😊" class="feeling">
+
             </form>
 
             {% if request.user == articles.user %}
@@ -757,6 +762,32 @@
 </script>
 
 <script>
+  const symform = document.querySelector('#sym-form')
 
+  symform.addEventListener('submit', function (event) {
+    event.preventDefault();
+    console.log(event)
+    
+    axios({
+      method : 'POST',
+      url: `/articles/${event.target.dataset.detailId}/happy/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(response => {
+      console.log('hello')
+      })
+    })
+    
+  //   .then(response => {
+  //     console.log(response)
+  //     if (response.data.s === true) {
+  //       event.target.classList.add('m-2')
+  //     } else {
+  //       event.target.classList.remove('m-2')
+  //     }
+  //   })
+  // })
 </script>
 {% endblock content %}

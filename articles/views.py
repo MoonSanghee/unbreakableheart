@@ -186,6 +186,7 @@ def comment_delete(request, articles_pk, comment_pk):
 @login_required
 def sympathy(request, articles_pk):
     articles = Articles.objects.get(pk=articles_pk)
+    
     if request.POST["feeling"] == "😊":
         feeling = 1
     elif request.POST["feeling"] == "😥":
@@ -194,16 +195,32 @@ def sympathy(request, articles_pk):
         feeling = 3
     else:
         feeling = 4
-    sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=feeling)
+    sympathys = Sympathy.objects.filter(articles=articles, user=request.user, feeling=feeling)
     
-    if sympathy:
-        sympathy.delete()
+    if sympathys:
+        sympathys.delete()
+        s = False
     else:
         Sympathy.objects.create(articles=articles, user=request.user, feeling=feeling)
+        s = True
+    data = {'s': s}
+    return JsonResponse(data)
 
-
-    return redirect("articles:articles_detail", articles_pk)
-
+@login_required
+def happy(request, articles_pk):
+    print('hello')
+    articles = Articles.objects.get(pk=articles_pk)
+    sympathy = Sympathy.objects.filter(articles=articles, user=request.user, feeling=1)
+    if sympathy:
+        sympathy.delete()
+        s = False
+    else:
+        Sympathy.objects.create(articles=articles, user=request.user, feeling=1)
+        s = True
+    data = {
+        's': s,
+    }
+    return JsonResponse(data)
 
 # 게시글 신고
 from django.db import IntegrityError
