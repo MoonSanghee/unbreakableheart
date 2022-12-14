@@ -1,6 +1,6 @@
 # 💌 지금, 우린
 
-![main (2)](READE.assets/main (2).gif)
+![main (2)](README.assets/main (2).gif)
 
 > **프로젝트명 : 지금, 우린**
 >
@@ -42,7 +42,7 @@
 
 ### [메인 페이지]
 
-![main (2)](READE.assets/main (2)-16709993051783.gif)
+![main (2)](README.assets/main (2)-16709993051783.gif)
 
 - 
 
@@ -52,9 +52,9 @@
 
 - **생성**
 
-![crud1](READE.assets/crud1.png)
+![crud1](README.assets/crud1.png)
 
-![crud4](READE.assets/crud4.png)
+![crud4](README.assets/crud4.png)
 
 - 
 
@@ -62,9 +62,9 @@
 
 - **음악** 
 
-![crud2](READE.assets/crud2-16709995624858.png)
+![crud2](README.assets/crud2-16709995624858.png)
 
-![crud3](READE.assets/crud3.png)
+![crud3](README.assets/crud3.png)
 
 - 
 
@@ -72,9 +72,9 @@
 
 - **생성 화면**
 
-![crud5](READE.assets/crud5.png)
+![crud5](README.assets/crud5.png)
 
-![crud (2)](READE.assets/crud (2).gif)
+![crud (2)](README.assets/crud (2).gif)
 
 - 
 
@@ -82,9 +82,9 @@
 
 ### [다이어리]
 
-![diary1](READE.assets/diary1.png)
+![diary1](README.assets/diary1.png)
 
-![diary2](READE.assets/diary2.png)
+![diary2](README.assets/diary2.png)
 
 - 
 
@@ -92,7 +92,7 @@
 
 ### [커뮤니티]
 
-![community](READE.assets/community.png)
+![community](README.assets/community.png)
 
 - 
 
@@ -102,7 +102,7 @@
 
 - **로그인**
 
-![login](READE.assets/login.png)
+![login](README.assets/login.png)
 
 - 
 
@@ -110,11 +110,11 @@
 
 - **회원가입**
 
-![signup1](READE.assets/signup1.png)
+![signup1](README.assets/signup1.png)
 
-![signup2](READE.assets/signup2.png)
+![signup2](README.assets/signup2.png)
 
-![signup3](READE.assets/signup3.png)
+![signup3](README.assets/signup3.png)
 
 - 
 
@@ -122,9 +122,9 @@
 
 ### [마이페이지]
 
-![mypage (2)](READE.assets/mypage (2).gif)
+![mypage (2)](README.assets/mypage (2).gif)
 
-![mypage1](READE.assets/mypage1.png)
+![mypage1](README.assets/mypage1.png)
 
 - 
 
@@ -132,13 +132,13 @@
 
 - **메세지**
 
-![mypage2](READE.assets/mypage2.png)
+![mypage2](README.assets/mypage2.png)
 
-![mypage3](READE.assets/mypage3.png)
+![mypage3](README.assets/mypage3.png)
 
-![mypage4](READE.assets/mypage4.png)
+![mypage4](README.assets/mypage4.png)
 
-![mypage5](READE.assets/mypage5.png)
+![mypage5](README.assets/mypage5.png)
 
 - 
 
