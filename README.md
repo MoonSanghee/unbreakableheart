@@ -1,6 +1,6 @@
 # 💌 지금, 우린
 
-![main (2)](README.assets/main (2).gif)
+![main](README.assets/main-16710024721801.gif)
 
 > **프로젝트명 : 지금, 우린**
 >
@@ -42,7 +42,7 @@
 
 ### [메인 페이지]
 
-![main (2)](README.assets/main (2)-16709993051783.gif)
+![main](README.assets/main-16710024843733.gif)
 
 - 
 
@@ -74,7 +74,7 @@
 
 ![crud5](README.assets/crud5.png)
 
-![crud (2)](README.assets/crud (2).gif)
+![crud](README.assets/crud-16710024988365.gif)
 
 - 
 
@@ -122,7 +122,7 @@
 
 ### [마이페이지]
 
-![mypage (2)](README.assets/mypage (2).gif)
+![mypage](README.assets/mypage.gif)
 
 ![mypage1](README.assets/mypage1.png)
 
